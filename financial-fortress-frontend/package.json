@@ -62,6 +62,7 @@
     "@vaadin/vaadin-app-layout": "23.1.6",
     "@vaadin/vaadin-avatar": "23.1.6",
     "@vaadin/vaadin-button": "23.1.6",
+    "@vaadin/vaadin-charts": "7.0.0",
     "@vaadin/vaadin-checkbox": "23.1.6",
     "@vaadin/vaadin-combo-box": "23.1.6",
     "@vaadin/vaadin-context-menu": "23.1.6",
@@ -188,6 +189,7 @@
       "@vaadin/vaadin-app-layout": "23.1.6",
       "@vaadin/vaadin-avatar": "23.1.6",
       "@vaadin/vaadin-button": "23.1.6",
+      "@vaadin/vaadin-charts": "7.0.0",
       "@vaadin/vaadin-checkbox": "23.1.6",
       "@vaadin/vaadin-combo-box": "23.1.6",
       "@vaadin/vaadin-context-menu": "23.1.6",
@@ -253,7 +255,7 @@
       "workbox-precaching": "6.5.0",
       "workbox-webpack-plugin": "6.5.0"
     },
-    "hash": "723133f9a91d607be28e6d5b9380fceecba6e55a2b3024f825e758a29d2c1bc0"
+    "hash": "074c20a680842b1d821160324a99ca085fe41c55808d9878519461453540ca13"
   },
   "overrides": {
     "@vaadin/bundles": "$@vaadin/bundles",
@@ -356,6 +358,7 @@
     "lit": "$lit",
     "@polymer/polymer": "$@polymer/polymer",
     "chokidar": "$chokidar",
-    "date-fns": "$date-fns"
+    "date-fns": "$date-fns",
+    "@vaadin/vaadin-charts": "$@vaadin/vaadin-charts"
   }
 }
