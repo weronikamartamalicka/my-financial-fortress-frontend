@@ -12,6 +12,7 @@
     "@vaadin/app-layout": "23.1.6",
     "@vaadin/avatar": "23.1.6",
     "@vaadin/avatar-group": "23.1.6",
+    "@vaadin/board": "23.1.6",
     "@vaadin/bundles": "23.1.6",
     "@vaadin/button": "23.1.6",
     "@vaadin/checkbox": "23.1.6",
@@ -61,6 +62,7 @@
     "@vaadin/vaadin-accordion": "23.1.6",
     "@vaadin/vaadin-app-layout": "23.1.6",
     "@vaadin/vaadin-avatar": "23.1.6",
+    "@vaadin/vaadin-board": "23.1.6",
     "@vaadin/vaadin-button": "23.1.6",
     "@vaadin/vaadin-charts": "7.0.0",
     "@vaadin/vaadin-checkbox": "23.1.6",
@@ -140,6 +142,7 @@
       "@vaadin/app-layout": "23.1.6",
       "@vaadin/avatar": "23.1.6",
       "@vaadin/avatar-group": "23.1.6",
+      "@vaadin/board": "23.1.6",
       "@vaadin/bundles": "23.1.6",
       "@vaadin/button": "23.1.6",
       "@vaadin/checkbox": "23.1.6",
@@ -188,6 +191,7 @@
       "@vaadin/vaadin-accordion": "23.1.6",
       "@vaadin/vaadin-app-layout": "23.1.6",
       "@vaadin/vaadin-avatar": "23.1.6",
+      "@vaadin/vaadin-board": "23.1.6",
       "@vaadin/vaadin-button": "23.1.6",
       "@vaadin/vaadin-charts": "7.0.0",
       "@vaadin/vaadin-checkbox": "23.1.6",
@@ -255,7 +259,7 @@
       "workbox-precaching": "6.5.0",
       "workbox-webpack-plugin": "6.5.0"
     },
-    "hash": "074c20a680842b1d821160324a99ca085fe41c55808d9878519461453540ca13"
+    "hash": "7fb434563bf129ccf84df960bcf31f6689b3b71b028cf76b4df92730fb093394"
   },
   "overrides": {
     "@vaadin/bundles": "$@vaadin/bundles",
@@ -359,6 +363,8 @@
     "@polymer/polymer": "$@polymer/polymer",
     "chokidar": "$chokidar",
     "date-fns": "$date-fns",
-    "@vaadin/vaadin-charts": "$@vaadin/vaadin-charts"
+    "@vaadin/vaadin-charts": "$@vaadin/vaadin-charts",
+    "@vaadin/board": "$@vaadin/board",
+    "@vaadin/vaadin-board": "$@vaadin/vaadin-board"
   }
 }

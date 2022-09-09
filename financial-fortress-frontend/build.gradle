@@ -19,8 +19,13 @@ ext {
 
 dependencies {
     implementation 'com.vaadin:vaadin-spring-boot-starter'
+    implementation group: 'org.springframework', name: 'spring-web', version: '5.3.22'
+    implementation group: 'org.springframework', name: 'spring-webflux', version: '5.3.22'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-reactor-netty', version: '2.7.3'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation 'com.vaadin:vaadin-charts-flow:18.0.6'
+    implementation 'com.vaadin:vaadin-board-flow-demo:22.0.22'
+    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.24'
 }
 
 dependencyManagement {
