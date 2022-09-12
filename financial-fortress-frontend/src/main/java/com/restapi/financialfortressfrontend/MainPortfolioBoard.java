@@ -3,6 +3,7 @@ package com.restapi.financialfortressfrontend;
 import com.restapi.financialfortressfrontend.client.ModelPortfolioClient;
 import com.restapi.financialfortressfrontend.domain.PortfolioValuesResponse;
 import com.vaadin.flow.component.board.Board;
+import com.vaadin.flow.component.board.Row;
 import com.vaadin.flow.component.charts.Chart;
 import com.vaadin.flow.component.charts.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,15 +68,20 @@ public class MainPortfolioBoard extends Board {
         PortfolioValuesResponse last = response.get(response.size() - 1);
         PortfolioValuesResponse previous = response.get(response.size() - 2);
 
+        Row rootRow = new Row();
+        rootRow.add(chart, 2);
 
-        board.addRow(
-                new ExampleIndicator("Whole Portfolio change", Double.toString(last.entireValue - first.entireValue)
-                        , Double.toString(100 * (last.entireValue - first.entireValue) / first.entireValue) + "%"),
-                new ExampleIndicator("Last Portfolio change",  Double.toString(last.entireValue - previous.entireValue),
-                        Double.toString(100 * (last.entireValue - previous.entireValue) / previous.entireValue) + "%")
-        );
-
-        board.addRow(chart);
+        Row nestedRow = new Row(new VisualPortfolioStatistics("Entire change",
+                Double.toString(last.entireValue - first.entireValue) + "zł",
+                Double.toString(100 * ((last.entireValue - first.entireValue) / first.entireValue)) + "%"
+                ),
+                new Row(new VisualPortfolioStatistics("Last change",
+                        Double.toString(last.entireValue - previous.entireValue) + "zł",
+                        Double.toString(100 * ((last.entireValue - previous.entireValue) / previous.entireValue)) + "%"
+                )
+                ));
+        rootRow.addNestedRow(nestedRow);
+        board.add(rootRow);
 
         return board;
     }
