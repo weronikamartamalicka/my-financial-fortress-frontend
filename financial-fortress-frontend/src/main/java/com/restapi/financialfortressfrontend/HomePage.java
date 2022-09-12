@@ -2,8 +2,6 @@ package com.restapi.financialfortressfrontend;
 
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
-import com.vaadin.flow.component.board.Board;
-import com.vaadin.flow.component.charts.Chart;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -16,10 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Route("home")
 public class HomePage extends AppLayout {
 
-    private HomeBoard homeBoard;
+    private PortfolioStatistics portfolioStatistics;
     @Autowired
-    public HomePage(HomeBoard homeBoard) {
-        this.homeBoard = homeBoard;
+    public HomePage(PortfolioStatistics portfolioStatistics) {
+        this.portfolioStatistics = portfolioStatistics;
 
         DrawerToggle toggle = new DrawerToggle();
 
@@ -31,9 +29,7 @@ public class HomePage extends AppLayout {
         Tabs tabs = getTabs();
         tabs.setOrientation(Tabs.Orientation.VERTICAL);
 
-        Board board = homeBoard.getBoard();
-
-        setContent(board);
+        setContent(portfolioStatistics);
 
         addToDrawer(tabs);
         addToNavbar(toggle, title);
@@ -52,5 +48,4 @@ public class HomePage extends AppLayout {
 
         return new Tabs(home, gold, bondsQuoted, bondsIndexed, emergingMarket, developedMarket);
     }
-
 }

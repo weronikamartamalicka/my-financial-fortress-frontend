@@ -5,9 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class ModelPortfolioClient {
@@ -29,6 +27,27 @@ public class ModelPortfolioClient {
         } catch (RestClientException e) {
             e.printStackTrace();
             return new PortfolioValuesResponse();
+        }
+    }
+
+    public Set<PortfolioValuesResponse> getAllPortfolioValues() {
+
+        WebClient webClient = WebClient.builder().baseUrl(API_ROOT + "portfolio").build();
+        try {
+            PortfolioValuesResponse[] response = webClient
+                    .get()
+                    .retrieve()
+                    .bodyToMono(PortfolioValuesResponse[].class).block();
+
+            List<PortfolioValuesResponse> responseList = Optional.ofNullable(response)
+                    .map(Arrays::asList)
+                    .orElse(Collections.emptyList());
+            HashSet<PortfolioValuesResponse> portfolioSet = new HashSet<>(responseList);
+
+            return portfolioSet;
+        } catch (RestClientException e) {
+            e.printStackTrace();
+            return Collections.emptySet();
         }
     }
 }
