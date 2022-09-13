@@ -1,4 +1,4 @@
-package com.restapi.financialfortressfrontend;
+package com.restapi.financialfortressfrontend.main.page;
 
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
@@ -14,10 +14,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Route("home")
 public class HomePage extends AppLayout {
 
-    private PortfolioStatistics portfolioStatistics;
+    private PortfolioMainPage portfolioMainPage;
+    private GoldMainPage goldMainPage;
     @Autowired
-    public HomePage(PortfolioStatistics portfolioStatistics) {
-        this.portfolioStatistics = portfolioStatistics;
+    public HomePage(PortfolioMainPage portfolioMainPage, GoldMainPage goldMainPage) {
+        this.portfolioMainPage = portfolioMainPage;
+        this.goldMainPage = goldMainPage;
 
         DrawerToggle toggle = new DrawerToggle();
 
@@ -29,7 +31,7 @@ public class HomePage extends AppLayout {
         Tabs tabs = getTabs();
         tabs.setOrientation(Tabs.Orientation.VERTICAL);
 
-        setContent(portfolioStatistics);
+        setContent(portfolioMainPage);
 
         addToDrawer(tabs);
         addToNavbar(toggle, title);
@@ -40,7 +42,15 @@ public class HomePage extends AppLayout {
     private Tabs getTabs() {
 
         Tab home = new Tab(VaadinIcon.WALLET.create(), new Span("Home"));
+        home.getElement().addEventListener("click", event -> {
+            remove(goldMainPage);
+            setContent(portfolioMainPage);
+        });
         Tab gold = new Tab(VaadinIcon.PIGGY_BANK_COIN.create(), new Span("Gold"));
+        gold.getElement().addEventListener("click", e -> {
+            remove(portfolioMainPage);
+            setContent(goldMainPage);
+        });
         Tab bondsQuoted = new Tab(VaadinIcon.DIPLOMA.create(), new Span("BondsQuoted"));
         Tab bondsIndexed = new Tab(VaadinIcon.INSTITUTION.create(), new Span("BondsIndexed"));
         Tab emergingMarket = new Tab(VaadinIcon.BUILDING_O.create(), new Span("EmergingMarketETF"));

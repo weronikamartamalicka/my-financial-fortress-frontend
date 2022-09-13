@@ -1,7 +1,8 @@
-package com.restapi.financialfortressfrontend;
+package com.restapi.financialfortressfrontend.boards;
 
+import com.restapi.financialfortressfrontend.VisualStatistics;
 import com.restapi.financialfortressfrontend.client.ModelPortfolioClient;
-import com.restapi.financialfortressfrontend.domain.PortfolioValuesResponse;
+import com.restapi.financialfortressfrontend.domain.dto.PortfolioValuesResponse;
 import com.vaadin.flow.component.board.Board;
 import com.vaadin.flow.component.board.Row;
 import com.vaadin.flow.component.charts.Chart;
@@ -9,12 +10,8 @@ import com.vaadin.flow.component.charts.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 @Component
@@ -71,11 +68,11 @@ public class MainPortfolioBoard extends Board {
         Row rootRow = new Row();
         rootRow.add(chart, 2);
 
-        Row nestedRow = new Row(new VisualPortfolioStatistics("Entire change",
+        Row nestedRow = new Row(new VisualStatistics("Entire change",
                 Double.toString(last.entireValue - first.entireValue) + "zł",
                 Double.toString(100 * ((last.entireValue - first.entireValue) / first.entireValue)) + "%"
                 ),
-                new Row(new VisualPortfolioStatistics("Last change",
+                new Row(new VisualStatistics("Last change",
                         Double.toString(last.entireValue - previous.entireValue) + "zł",
                         Double.toString(100 * ((last.entireValue - previous.entireValue) / previous.entireValue)) + "%"
                 )

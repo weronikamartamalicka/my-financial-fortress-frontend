@@ -1,7 +1,7 @@
-package com.restapi.financialfortressfrontend;
+package com.restapi.financialfortressfrontend.charts;
 
 import com.restapi.financialfortressfrontend.client.ModelPortfolioClient;
-import com.restapi.financialfortressfrontend.domain.PortfolioValuesResponse;
+import com.restapi.financialfortressfrontend.domain.dto.PortfolioValuesResponse;
 import com.vaadin.flow.component.charts.Chart;
 import com.vaadin.flow.component.charts.model.*;
 import org.springframework.beans.factory.annotation.Autowired;

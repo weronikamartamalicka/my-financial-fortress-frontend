@@ -1,6 +1,6 @@
 package com.restapi.financialfortressfrontend.client;
 
-import com.restapi.financialfortressfrontend.domain.PortfolioValuesResponse;
+import com.restapi.financialfortressfrontend.domain.dto.PortfolioValuesResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.reactive.function.client.WebClient;

@@ -1,18 +1,20 @@
-package com.restapi.financialfortressfrontend;
+package com.restapi.financialfortressfrontend.main.page;
 
+import com.restapi.financialfortressfrontend.boards.MainPortfolioBoard;
+import com.restapi.financialfortressfrontend.charts.MainPortfolioChart;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class PortfolioStatistics extends VerticalLayout {
+public class PortfolioMainPage extends VerticalLayout {
 
     private MainPortfolioChart homeChart;
     private MainPortfolioBoard homeBoard;
 
     @Autowired
-    public PortfolioStatistics(MainPortfolioChart homeChart, MainPortfolioBoard homeBoard) {
+    public PortfolioMainPage(MainPortfolioChart homeChart, MainPortfolioBoard homeBoard) {
         this.homeChart = homeChart;
         this.homeBoard = homeBoard;
 
