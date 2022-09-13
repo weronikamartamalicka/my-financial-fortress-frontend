@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class EmergingResponse {
+public class MarketResponse {
     @JsonProperty("date")
     public LocalDateTime date;
 

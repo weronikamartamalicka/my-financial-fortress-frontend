@@ -2,29 +2,35 @@ package com.restapi.financialfortressfrontend.main.page;
 
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
+import com.vaadin.flow.component.charts.themes.LumoDarkTheme;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.theme.Theme;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
 @Route("home")
+@Theme("LumoDarkTheme.class")
 public class HomePage extends AppLayout {
 
     private PortfolioMainPage portfolioMainPage;
     private GoldMainPage goldMainPage;
     private BondsQuotedMainPage bondsQuotedMainPage;
     private EmergingMarketMainPage emergingMarketMainPage;
+    private DevelopedMarketMainPage developedMarketMainPage;
     @Autowired
     public HomePage(PortfolioMainPage portfolioMainPage, GoldMainPage goldMainPage,
-                    BondsQuotedMainPage bondsQuotedMainPage, EmergingMarketMainPage emergingMarketMainPage) {
+                    BondsQuotedMainPage bondsQuotedMainPage, EmergingMarketMainPage emergingMarketMainPage,
+                    DevelopedMarketMainPage developedMarketMainPage) {
         this.portfolioMainPage = portfolioMainPage;
         this.goldMainPage = goldMainPage;
         this.bondsQuotedMainPage = bondsQuotedMainPage;
         this.emergingMarketMainPage = emergingMarketMainPage;
+        this.developedMarketMainPage = developedMarketMainPage;
 
         DrawerToggle toggle = new DrawerToggle();
 
@@ -68,6 +74,10 @@ public class HomePage extends AppLayout {
             setContent(emergingMarketMainPage);
         });
         Tab developedMarket = new Tab(VaadinIcon.BUILDING.create(), new Span("DevelopedMarketETF"));
+        developedMarket.getElement().addEventListener("click", e -> {
+            remove(portfolioMainPage);
+            setContent(developedMarketMainPage);
+        });
 
         return new Tabs(home, gold, bondsQuoted, bondsIndexed, emergingMarket, developedMarket);
     }

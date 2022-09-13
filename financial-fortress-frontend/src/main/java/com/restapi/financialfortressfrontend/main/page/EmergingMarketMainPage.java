@@ -2,7 +2,7 @@ package com.restapi.financialfortressfrontend.main.page;
 
 import com.restapi.financialfortressfrontend.boards.EmergingMarketBoard;
 import com.restapi.financialfortressfrontend.client.EmergingMarketClient;
-import com.restapi.financialfortressfrontend.domain.dto.EmergingInvestmentResponse;
+import com.restapi.financialfortressfrontend.domain.dto.MarketInvestmentResponse;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -29,7 +29,7 @@ public class EmergingMarketMainPage extends VerticalLayout {
     private class EmergingMarketInvestInfo extends HorizontalLayout {
 
         public EmergingMarketInvestInfo() {
-            EmergingInvestmentResponse investment = emergingMarketClient.getActualInvestInfo();
+            MarketInvestmentResponse investment = emergingMarketClient.getActualInvestInfo();
             Icon icon = new Icon(VaadinIcon.BUILDING_O);
             icon.setSize("20");
             Span type = new Span("Emerging market investment type : " + investment.type);

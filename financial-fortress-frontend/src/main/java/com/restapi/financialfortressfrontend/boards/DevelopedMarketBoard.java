@@ -1,8 +1,8 @@
 package com.restapi.financialfortressfrontend.boards;
 
 import com.restapi.financialfortressfrontend.VisualStatistics;
-import com.restapi.financialfortressfrontend.charts.EmergingMarketChart;
-import com.restapi.financialfortressfrontend.client.EmergingMarketClient;
+import com.restapi.financialfortressfrontend.charts.DevelopedMarketChart;
+import com.restapi.financialfortressfrontend.client.DevelopedMarketClient;
 import com.restapi.financialfortressfrontend.domain.dto.MarketInvestmentResponse;
 import com.vaadin.flow.component.board.Board;
 import com.vaadin.flow.component.board.Row;
@@ -16,25 +16,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class EmergingMarketBoard extends Board {
+public class DevelopedMarketBoard {
 
-    private EmergingMarketClient emergingMarketClient;
-    private EmergingMarketChart emergingMarketChart;
+    private DevelopedMarketClient developedMarketClient;
+    private DevelopedMarketChart developedMarketChart;
 
     @Autowired
-    public EmergingMarketBoard(EmergingMarketClient emergingMarketClient, EmergingMarketChart emergingMarketChart) {
-        this.emergingMarketClient = emergingMarketClient;
-        this.emergingMarketChart = emergingMarketChart;
+    public DevelopedMarketBoard(DevelopedMarketClient developedMarketClient, DevelopedMarketChart developedMarketChart) {
+        this.developedMarketClient = developedMarketClient;
+        this.developedMarketChart = developedMarketChart;
     }
 
     public Board getBoard() {
         Board board = new Board();
-        Chart chart = emergingMarketChart.getChart();
+        Chart chart = developedMarketChart.getChart();
 
         Row rootRow = new Row();
         rootRow.add(chart, 2);
 
-        List<MarketInvestmentResponse> response = new ArrayList<>(emergingMarketClient.getEmergingInvestmentValues());
+        List<MarketInvestmentResponse> response = new ArrayList<>(developedMarketClient.getDevelopedInvestmentValues());
         MarketInvestmentResponse first = response.get(0);
         MarketInvestmentResponse last = response.get(response.size() - 1);
         MarketInvestmentResponse previous = response.get(response.size() - 2);

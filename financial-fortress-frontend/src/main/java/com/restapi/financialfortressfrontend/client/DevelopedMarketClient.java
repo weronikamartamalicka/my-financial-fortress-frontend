@@ -9,11 +9,11 @@ import org.springframework.web.reactive.function.client.WebClient;
 import java.util.*;
 
 @Service
-public class EmergingMarketClient {
+public class DevelopedMarketClient {
 
-    private final static String API_ROOT = "http://localhost:8080/v1/emerging";
+    private final static String API_ROOT = "http://localhost:8080/v1/developed";
 
-    public Set<MarketResponse> getAllEmergingValues() {
+    public Set<MarketResponse> getAllDevelopedValues() {
 
         WebClient webClient = WebClient.builder().baseUrl(API_ROOT + "/value").build();
         try {
@@ -55,7 +55,7 @@ public class EmergingMarketClient {
         }
     }
 
-    public Set<MarketInvestmentResponse> getEmergingInvestmentValues() {
+    public Set<MarketInvestmentResponse> getDevelopedInvestmentValues() {
         WebClient webClient = WebClient.builder().baseUrl(API_ROOT+ "/invest").build();
         try {
             MarketInvestmentResponse[] response = webClient

@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class EmergingInvestmentResponse {
+public class MarketInvestmentResponse {
     @JsonProperty("date")
     public LocalDateTime date;
 
