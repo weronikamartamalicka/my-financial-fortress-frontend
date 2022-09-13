@@ -20,7 +20,7 @@ public class PortfolioValuesResponse {
     public Date date;
 
     @JsonProperty("entireValue")
-    public double entireValue;
+    public BigDecimal entireValue;
 
     @JsonProperty("goldValue")
     public BigDecimal goldValue;

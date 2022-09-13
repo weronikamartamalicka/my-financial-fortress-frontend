@@ -10,6 +10,8 @@ import com.vaadin.flow.component.charts.Chart;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,12 +40,16 @@ public class GoldBoard extends Board {
         GoldResponse previous = response.get(response.size() - 2);
 
         Row nestedRow = new Row(new VisualStatistics("Entire change",
-                Double.toString(last.oneCoinPrice - first.oneCoinPrice) + "zł",
-                Double.toString(100 * ((last.oneCoinPrice - first.oneCoinPrice) / first.oneCoinPrice)) + "%"
+                last.oneCoinPrice.subtract(first.oneCoinPrice).toString() + "zł",
+                last.oneCoinPrice.subtract(first.oneCoinPrice)
+                        .divide(first.oneCoinPrice, 2, RoundingMode.HALF_UP)
+                        .multiply(BigDecimal.valueOf(100))+ "%"
         ),
                 new Row(new VisualStatistics("Last change",
-                        Double.toString(last.oneCoinPrice - previous.oneCoinPrice) + "zł",
-                        Double.toString(100 * ((last.oneCoinPrice - previous.oneCoinPrice) / previous.oneCoinPrice)) + "%"
+                        last.oneCoinPrice.subtract(previous.oneCoinPrice).toString() + "zł",
+                        last.oneCoinPrice.subtract(previous.oneCoinPrice)
+                                .divide(previous.oneCoinPrice, 2, RoundingMode.HALF_UP)
+                                .multiply(BigDecimal.valueOf(100))+ "%"
                 )
                 ));
         rootRow.addNestedRow(nestedRow);

@@ -9,14 +9,17 @@ import java.time.LocalDateTime;
 
 @Getter
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class GoldResponse {
+public class BondsIndexedResponse {
+
+    @JsonProperty("type")
+    public String type;
 
     @JsonProperty("date")
     public LocalDateTime date;
 
-    @JsonProperty("TYPE")
-    public String type;
+    @JsonProperty("valuation")
+    public BigDecimal valuation;
 
-    @JsonProperty("oneCoinPrice")
-    public BigDecimal oneCoinPrice;
+    @JsonProperty("interestsValuation")
+    public BigDecimal interestsValuation;
 }

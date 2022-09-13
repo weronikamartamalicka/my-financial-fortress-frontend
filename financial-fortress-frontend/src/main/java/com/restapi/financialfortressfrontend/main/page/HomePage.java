@@ -2,19 +2,16 @@ package com.restapi.financialfortressfrontend.main.page;
 
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
-import com.vaadin.flow.component.charts.themes.LumoDarkTheme;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.theme.Theme;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
 @Route("home")
-@Theme("LumoDarkTheme.class")
 public class HomePage extends AppLayout {
 
     private PortfolioMainPage portfolioMainPage;
@@ -22,15 +19,17 @@ public class HomePage extends AppLayout {
     private BondsQuotedMainPage bondsQuotedMainPage;
     private EmergingMarketMainPage emergingMarketMainPage;
     private DevelopedMarketMainPage developedMarketMainPage;
+    private BondsIndexedMainPage bondsIndexedMainPage;
     @Autowired
     public HomePage(PortfolioMainPage portfolioMainPage, GoldMainPage goldMainPage,
                     BondsQuotedMainPage bondsQuotedMainPage, EmergingMarketMainPage emergingMarketMainPage,
-                    DevelopedMarketMainPage developedMarketMainPage) {
+                    DevelopedMarketMainPage developedMarketMainPage, BondsIndexedMainPage bondsIndexedMainPage) {
         this.portfolioMainPage = portfolioMainPage;
         this.goldMainPage = goldMainPage;
         this.bondsQuotedMainPage = bondsQuotedMainPage;
         this.emergingMarketMainPage = emergingMarketMainPage;
         this.developedMarketMainPage = developedMarketMainPage;
+        this.bondsIndexedMainPage = bondsIndexedMainPage;
 
         DrawerToggle toggle = new DrawerToggle();
 
@@ -68,6 +67,10 @@ public class HomePage extends AppLayout {
             setContent(bondsQuotedMainPage);
         });
         Tab bondsIndexed = new Tab(VaadinIcon.INSTITUTION.create(), new Span("BondsIndexed"));
+        bondsIndexed.getElement().addEventListener("click", e -> {
+            remove(portfolioMainPage);
+            setContent(bondsIndexedMainPage);
+        });
         Tab emergingMarket = new Tab(VaadinIcon.BUILDING_O.create(), new Span("EmergingMarketETF"));
         emergingMarket.getElement().addEventListener("click", e -> {
             remove(portfolioMainPage);

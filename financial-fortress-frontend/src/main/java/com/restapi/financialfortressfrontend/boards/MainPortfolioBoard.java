@@ -10,6 +10,8 @@ import com.vaadin.flow.component.charts.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,12 +71,18 @@ public class MainPortfolioBoard extends Board {
         rootRow.add(chart, 2);
 
         Row nestedRow = new Row(new VisualStatistics("Entire change",
-                Double.toString(last.entireValue - first.entireValue) + "zł",
-                Double.toString(100 * ((last.entireValue - first.entireValue) / first.entireValue)) + "%"
+                last.entireValue.subtract(first.entireValue).toString() + "zł",
+                last.entireValue.subtract(first.entireValue)
+                        .divide(first.entireValue, 2, RoundingMode.HALF_UP)
+                        .multiply(BigDecimal.valueOf(100))
+                        .toString() + "%"
                 ),
                 new Row(new VisualStatistics("Last change",
-                        Double.toString(last.entireValue - previous.entireValue) + "zł",
-                        Double.toString(100 * ((last.entireValue - previous.entireValue) / previous.entireValue)) + "%"
+                        last.entireValue.subtract(previous.entireValue).toString() + "zł",
+                        last.entireValue.subtract(previous.entireValue)
+                                .divide(previous.entireValue, 2, RoundingMode.HALF_UP)
+                                .multiply(BigDecimal.valueOf(100))
+                                .toString() + "%"
                 )
                 ));
         rootRow.addNestedRow(nestedRow);

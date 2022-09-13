@@ -42,13 +42,13 @@ public class DevelopedMarketBoard {
         Row nestedRow = new Row(new VisualStatistics("Entire change",
                 last.entireValuation.subtract(first.entireValuation).toString() + "zł",
                 last.entireValuation.subtract(first.entireValuation)
-                        .divide(first.entireValuation, 4, RoundingMode.HALF_UP)
+                        .divide(first.entireValuation, 2, RoundingMode.HALF_UP)
                         .multiply(BigDecimal.valueOf(100)).toString() + "%"
         ),
                 new Row(new VisualStatistics("Last change",
                         last.entireValuation.subtract(previous.entireValuation).toString() + "zł",
                         last.entireValuation.subtract(previous.entireValuation)
-                                .divide(previous.entireValuation, 4, RoundingMode.HALF_UP)
+                                .divide(previous.entireValuation, 2, RoundingMode.HALF_UP)
                                 .multiply(BigDecimal.valueOf(100)).toString() + "%"
                 )));
         rootRow.addNestedRow(nestedRow);

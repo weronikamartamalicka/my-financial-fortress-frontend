@@ -1,9 +1,9 @@
 package com.restapi.financialfortressfrontend.boards;
 
 import com.restapi.financialfortressfrontend.VisualStatistics;
-import com.restapi.financialfortressfrontend.charts.BondQuotedChart;
-import com.restapi.financialfortressfrontend.client.BondsQuotedClient;
-import com.restapi.financialfortressfrontend.domain.dto.BondsInvestmentResponse;
+import com.restapi.financialfortressfrontend.charts.BondsIndexedChart;
+import com.restapi.financialfortressfrontend.client.BondsIndexedClient;
+import com.restapi.financialfortressfrontend.domain.dto.BondsIndexedInvestmentResponse;
 import com.vaadin.flow.component.board.Board;
 import com.vaadin.flow.component.board.Row;
 import com.vaadin.flow.component.charts.Chart;
@@ -16,28 +16,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class BondsQuotedBoard extends Board {
+public class BondsIndexedBoard extends Board {
 
-    private BondsQuotedClient bondsQuotedClient;
-    private BondQuotedChart bondQuotedChart;
+    private BondsIndexedClient bondsIndexedClient;
+    private BondsIndexedChart bondsIndexedChart;
 
     @Autowired
-    public BondsQuotedBoard(BondsQuotedClient bondsQuotedClient, BondQuotedChart bondQuotedChart) {
-        this.bondsQuotedClient = bondsQuotedClient;
-        this.bondQuotedChart = bondQuotedChart;
+    public BondsIndexedBoard(BondsIndexedClient bondsIndexedClient, BondsIndexedChart bondsIndexedChart) {
+        this.bondsIndexedClient = bondsIndexedClient;
+        this.bondsIndexedChart = bondsIndexedChart;
     }
 
     public Board getBoard() {
         Board board = new Board();
-        Chart chart = bondQuotedChart.getChart();
+        Chart chart = bondsIndexedChart.getChart();
 
         Row rootRow = new Row();
         rootRow.add(chart, 2);
 
-        List<BondsInvestmentResponse> response = new ArrayList<>(bondsQuotedClient.getBondInvestmentValues());
-        BondsInvestmentResponse first = response.get(0);
-        BondsInvestmentResponse last = response.get(response.size() - 1);
-        BondsInvestmentResponse previous = response.get(response.size() - 2);
+        List<BondsIndexedInvestmentResponse> response = new ArrayList<>(bondsIndexedClient.getBondInvestmentValues());
+        BondsIndexedInvestmentResponse first = response.get(0);
+        BondsIndexedInvestmentResponse last = response.get(response.size() - 1);
+        BondsIndexedInvestmentResponse previous = response.get(response.size() - 2);
 
         Row nestedRow = new Row(new VisualStatistics("Entire change",
                 last.entireValuation.subtract(first.entireValuation).toString() + "zł",
