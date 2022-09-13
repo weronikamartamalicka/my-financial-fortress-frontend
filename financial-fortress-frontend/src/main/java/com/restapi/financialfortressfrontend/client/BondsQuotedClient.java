@@ -75,25 +75,4 @@ public class BondsQuotedClient {
 
     }
 
-    public Set<YearBondsResponse> getYearBondsValues() {
-
-        WebClient webClient = WebClient.builder().baseUrl(API_ROOT + "/values").build();
-        try {
-            YearBondsResponse[] response = webClient
-                    .get()
-                    .retrieve()
-                    .bodyToMono(YearBondsResponse[].class).block();
-
-            List<YearBondsResponse> responseList = Optional.ofNullable(response)
-                    .map(Arrays::asList)
-                    .orElse(Collections.emptyList());
-            HashSet<YearBondsResponse> yearBondsSet = new HashSet<>(responseList);
-
-            return yearBondsSet;
-        } catch (RestClientException e) {
-            e.printStackTrace();
-            return Collections.emptySet();
-        }
-
-    }
 }
