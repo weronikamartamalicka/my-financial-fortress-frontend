@@ -35,6 +35,7 @@ public class BondsQuotedClient {
             List<BondsResponse> responseList = Optional.ofNullable(response)
                     .map(Arrays::asList)
                     .orElse(Collections.emptyList());
+            Collections.sort(responseList, Comparator.comparing(BondsResponse::getDate));
             HashSet<BondsResponse> bondsSet = new HashSet<>(responseList);
 
             return bondsSet;
@@ -65,7 +66,7 @@ public class BondsQuotedClient {
         }
     }
 
-    public Set<BondsInvestmentResponse> getBondInvestmentValues() {
+    public List<BondsInvestmentResponse> getBondInvestmentValues() {
         WebClient webClient = WebClient.builder().baseUrl(API_ROOT+ "/quoted").build();
         try {
             BondsInvestmentResponse[] response = webClient
@@ -76,12 +77,12 @@ public class BondsQuotedClient {
             List<BondsInvestmentResponse> responseList = Optional.ofNullable(response)
                     .map(Arrays::asList)
                     .orElse(Collections.emptyList());
-            HashSet<BondsInvestmentResponse> bondsSet = new HashSet<>(responseList);
-            return bondsSet;
+            Collections.sort(responseList, Comparator.comparing(BondsInvestmentResponse::getDate));
 
+            return responseList;
         } catch (RestClientException e) {
             e.printStackTrace();
-            return Collections.emptySet();
+            return Collections.emptyList();
         }
 
     }

@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Objects;
 
@@ -17,7 +18,7 @@ import java.util.Objects;
 public class PortfolioValuesResponse {
 
     @JsonProperty("date")
-    public Date date;
+    public LocalDateTime date;
 
     @JsonProperty("entireValue")
     public BigDecimal entireValue;
@@ -48,5 +49,9 @@ public class PortfolioValuesResponse {
     @Override
     public int hashCode() {
         return Objects.hash(date);
+    }
+
+    public LocalDateTime getDate() {
+        return date;
     }
 }

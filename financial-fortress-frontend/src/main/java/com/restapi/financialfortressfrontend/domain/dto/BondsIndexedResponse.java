@@ -22,4 +22,8 @@ public class BondsIndexedResponse {
 
     @JsonProperty("interestsValuation")
     public BigDecimal interestsValuation;
+
+    public LocalDateTime getDate() {
+        return date;
+    }
 }

@@ -24,7 +24,7 @@ public class GoldClient {
         }
     }
 
-    public Set<GoldResponse> getAllGoldValues() {
+    public List<GoldResponse> getAllGoldValues() {
 
         WebClient webClient = WebClient.builder().baseUrl(API_ROOT + "value").build();
         try {
@@ -36,12 +36,12 @@ public class GoldClient {
             List<GoldResponse> responseList = Optional.ofNullable(response)
                     .map(Arrays::asList)
                     .orElse(Collections.emptyList());
-            HashSet<GoldResponse> portfolioSet = new HashSet<>(responseList);
+            Collections.sort(responseList, Comparator.comparing(GoldResponse::getDate));
 
-            return portfolioSet;
+            return responseList;
         } catch (RestClientException e) {
             e.printStackTrace();
-            return Collections.emptySet();
+            return Collections.emptyList();
         }
 
     }

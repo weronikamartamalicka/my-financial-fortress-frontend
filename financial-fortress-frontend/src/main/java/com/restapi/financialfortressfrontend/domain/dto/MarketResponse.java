@@ -21,4 +21,8 @@ public class MarketResponse {
 
     @JsonProperty("commissionRate")
     public BigDecimal commissionRate;
+
+    public LocalDateTime getDate() {
+        return date;
+    }
 }

@@ -21,4 +21,8 @@ public class MarketInvestmentResponse {
 
     @JsonProperty("entireValuation")
     public BigDecimal entireValuation;
+
+    public LocalDateTime getDate() {
+        return date;
+    }
 }

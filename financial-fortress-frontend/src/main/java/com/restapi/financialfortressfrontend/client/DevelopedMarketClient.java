@@ -36,6 +36,7 @@ public class DevelopedMarketClient {
             List<MarketResponse> responseList = Optional.ofNullable(response)
                     .map(Arrays::asList)
                     .orElse(Collections.emptyList());
+            Collections.sort(responseList, Comparator.comparing(MarketResponse::getDate));
             HashSet<MarketResponse> marketSet = new HashSet<>(responseList);
 
             return marketSet;
@@ -66,7 +67,7 @@ public class DevelopedMarketClient {
         }
     }
 
-    public Set<MarketInvestmentResponse> getDevelopedInvestmentValues() {
+    public List<MarketInvestmentResponse> getDevelopedInvestmentValues() {
         WebClient webClient = WebClient.builder().baseUrl(API_ROOT+ "/invest").build();
         try {
             MarketInvestmentResponse[] response = webClient
@@ -77,12 +78,12 @@ public class DevelopedMarketClient {
             List<MarketInvestmentResponse> responseList = Optional.ofNullable(response)
                     .map(Arrays::asList)
                     .orElse(Collections.emptyList());
-            HashSet<MarketInvestmentResponse> marketSet = new HashSet<>(responseList);
-            return marketSet;
+            Collections.sort(responseList, Comparator.comparing(MarketInvestmentResponse::getDate));
 
+            return responseList;
         } catch (RestClientException e) {
             e.printStackTrace();
-            return Collections.emptySet();
+            return Collections.emptyList();
         }
 
     }

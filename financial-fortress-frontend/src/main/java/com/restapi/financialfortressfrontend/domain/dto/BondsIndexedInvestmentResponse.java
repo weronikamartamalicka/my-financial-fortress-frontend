@@ -35,4 +35,8 @@ public class BondsIndexedInvestmentResponse {
 
     @JsonProperty("entireValuation")
     public BigDecimal entireValuation;
+
+    public LocalDateTime getDate() {
+        return date;
+    }
 }

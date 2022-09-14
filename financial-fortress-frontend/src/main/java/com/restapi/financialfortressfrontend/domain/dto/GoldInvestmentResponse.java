@@ -18,4 +18,6 @@ public class GoldInvestmentResponse {
 
     @JsonProperty("entireValuation")
     public BigDecimal entireValuation;
+
+
 }

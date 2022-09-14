@@ -24,7 +24,7 @@ public class BondsIndexedClient {
         }
     }
 
-    public Set<BondsIndexedResponse> getAllInflationValues() {
+    public List<BondsIndexedResponse> getAllInflationValues() {
 
         WebClient webClient = WebClient.builder().baseUrl(API_ROOT + "/value").build();
         try {
@@ -36,12 +36,12 @@ public class BondsIndexedClient {
             List<BondsIndexedResponse> responseList = Optional.ofNullable(response)
                     .map(Arrays::asList)
                     .orElse(Collections.emptyList());
-            HashSet<BondsIndexedResponse> inflationSet = new HashSet<>(responseList);
+            Collections.sort(responseList, Comparator.comparing(BondsIndexedResponse::getDate));
 
-            return inflationSet;
+            return responseList;
         } catch (RestClientException e) {
             e.printStackTrace();
-            return Collections.emptySet();
+            return Collections.emptyList();
         }
 
     }
@@ -66,7 +66,7 @@ public class BondsIndexedClient {
         }
     }
 
-    public Set<BondsIndexedInvestmentResponse> getBondInvestmentValues() {
+    public List<BondsIndexedInvestmentResponse> getBondInvestmentValues() {
         WebClient webClient = WebClient.builder().baseUrl(API_ROOT+ "/invest").build();
         try {
             BondsIndexedInvestmentResponse[] response = webClient
@@ -74,16 +74,15 @@ public class BondsIndexedClient {
                     .retrieve()
                     .bodyToMono(BondsIndexedInvestmentResponse[].class).block();
 
-            List<
-                    BondsIndexedInvestmentResponse> responseList = Optional.ofNullable(response)
+            List<BondsIndexedInvestmentResponse> responseList = Optional.ofNullable(response)
                     .map(Arrays::asList)
                     .orElse(Collections.emptyList());
-            HashSet<BondsIndexedInvestmentResponse> inflationSet = new HashSet<>(responseList);
-            return inflationSet;
+            Collections.sort(responseList, Comparator.comparing(BondsIndexedInvestmentResponse::getDate));
 
+            return responseList;
         } catch (RestClientException e) {
             e.printStackTrace();
-            return Collections.emptySet();
+            return Collections.emptyList();
         }
 
     }

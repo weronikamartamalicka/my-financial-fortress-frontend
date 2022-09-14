@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import java.math.BigDecimal;
 import java.util.*;
 
 @Service
@@ -53,7 +52,7 @@ public class ModelPortfolioClient {
         }
     }
 
-    public Set<PortfolioValuesResponse> getAllPortfolioValues() {
+    public List<PortfolioValuesResponse> getAllPortfolioValues() {
 
         WebClient webClient = WebClient.builder().baseUrl(API_ROOT + "portfolio").build();
         try {
@@ -65,12 +64,12 @@ public class ModelPortfolioClient {
             List<PortfolioValuesResponse> responseList = Optional.ofNullable(response)
                     .map(Arrays::asList)
                     .orElse(Collections.emptyList());
-            HashSet<PortfolioValuesResponse> portfolioSet = new HashSet<>(responseList);
+            Collections.sort(responseList, Comparator.comparing(PortfolioValuesResponse::getDate));
 
-            return portfolioSet;
+            return responseList;
         } catch (RestClientException e) {
             e.printStackTrace();
-            return Collections.emptySet();
+            return Collections.emptyList();
         }
     }
 }
