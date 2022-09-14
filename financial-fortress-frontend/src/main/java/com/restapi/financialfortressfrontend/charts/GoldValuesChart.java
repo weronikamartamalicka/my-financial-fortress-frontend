@@ -33,9 +33,9 @@ public class GoldValuesChart extends Chart {
 
         XAxis xaxis = new XAxis();
 
-        goldClient.getAllGoldValues().stream()
+        goldClient.getAllGoldInvestmentValues().stream()
                 .forEach(goldResponse -> {
-                    series.add(new DataSeriesItem("Gold Coin Investment", goldResponse.oneCoinPrice));
+                    series.add(new DataSeriesItem("Gold Coin Investment", goldResponse.entireValuation));
                     xaxis.addCategory(goldResponse.date.toString());
                 });
 

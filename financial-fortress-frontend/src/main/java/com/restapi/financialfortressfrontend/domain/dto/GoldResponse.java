@@ -17,8 +17,8 @@ public class GoldResponse {
     @JsonProperty("TYPE")
     public String type;
 
-    @JsonProperty("oneCoinPrice")
-    public BigDecimal oneCoinPrice;
+    @JsonProperty("entireValuation")
+    public BigDecimal entireValuation;
 
     public LocalDateTime getDate() {
         return date;

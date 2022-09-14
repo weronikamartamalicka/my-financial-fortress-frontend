@@ -56,15 +56,20 @@ public class EmergingMarketClient {
                     .retrieve()
                     .bodyToMono(MarketInvestmentResponse[].class).block();
 
-            return Optional.ofNullable(response)
+            List<MarketInvestmentResponse> responseList = Optional.ofNullable(response)
                     .map(Arrays::asList)
-                    .orElse(Collections.emptyList())
-                    .get(response.length - 1);
+                    .orElse(Collections.emptyList());
+
+            if(!responseList.isEmpty()) {
+                return responseList.get(responseList.size() - 1);
+            }
 
         } catch (RestClientException e) {
             e.printStackTrace();
             return new MarketInvestmentResponse();
         }
+
+        return new MarketInvestmentResponse();
     }
 
     public List<MarketInvestmentResponse> getEmergingInvestmentValues() {

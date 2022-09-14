@@ -24,9 +24,9 @@ public class GoldClient {
         }
     }
 
-    public List<GoldResponse> getAllGoldValues() {
+    public List<GoldResponse> getAllGoldInvestmentValues() {
 
-        WebClient webClient = WebClient.builder().baseUrl(API_ROOT + "value").build();
+        WebClient webClient = WebClient.builder().baseUrl(API_ROOT + "invest").build();
         try {
             GoldResponse[] response = webClient
                     .get()
@@ -55,15 +55,18 @@ public class GoldClient {
                     .retrieve()
                     .bodyToMono(GoldInvestmentResponse[].class).block();
 
-            return Optional.ofNullable(response)
+            List<GoldInvestmentResponse> responseList = Optional.ofNullable(response)
                     .map(Arrays::asList)
-                    .orElse(Collections.emptyList())
-                    .get(response.length - 1);
+                    .orElse(Collections.emptyList());
+
+            if(!responseList.isEmpty()) {
+                return responseList.get(responseList.size() - 1);
+            }
 
         } catch (RestClientException e) {
             e.printStackTrace();
             return new GoldInvestmentResponse();
         }
-
+        return new GoldInvestmentResponse();
     }
 }

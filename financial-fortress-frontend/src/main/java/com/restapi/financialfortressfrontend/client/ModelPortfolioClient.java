@@ -42,14 +42,18 @@ public class ModelPortfolioClient {
                     .retrieve()
                     .bodyToMono(PortfolioValuesResponse[].class).block();
             int size = response.length;
-            return Optional.ofNullable(response)
+            List<PortfolioValuesResponse> responseList = Optional.ofNullable(response)
                     .map(Arrays::asList)
-                    .orElse(Collections.emptyList())
-                    .get(size - 1);
+                    .orElse(Collections.emptyList());
+
+            if(!responseList.isEmpty()) {
+                return responseList.get(responseList.size() - 1);
+            }
         } catch (RestClientException e) {
             e.printStackTrace();
             return new PortfolioValuesResponse();
         }
+        return new PortfolioValuesResponse();
     }
 
     public List<PortfolioValuesResponse> getAllPortfolioValues() {

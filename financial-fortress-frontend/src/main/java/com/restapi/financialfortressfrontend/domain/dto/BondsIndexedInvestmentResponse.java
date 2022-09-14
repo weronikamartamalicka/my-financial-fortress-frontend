@@ -39,4 +39,12 @@ public class BondsIndexedInvestmentResponse {
     public LocalDateTime getDate() {
         return date;
     }
+
+    public BondsIndexedInvestmentResponse(LocalDateTime date, BigDecimal quantity) {
+        this.date = date;
+        this.quantity = quantity;
+    }
+
+    public BondsIndexedInvestmentResponse() {
+    }
 }

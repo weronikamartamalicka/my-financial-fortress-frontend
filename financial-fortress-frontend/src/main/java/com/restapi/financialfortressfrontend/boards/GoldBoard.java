@@ -34,24 +34,40 @@ public class GoldBoard extends Board {
         Row rootRow = new Row();
         rootRow.add(chart, 2);
 
-        List<GoldResponse> response = new ArrayList<>(goldClient.getAllGoldValues());
-        GoldResponse first = response.get(0);
-        GoldResponse last = response.get(response.size() - 1);
-        GoldResponse previous = response.get(response.size() - 2);
+        Row nestedRow = new Row();
 
-        Row nestedRow = new Row(new VisualStatistics("Entire change",
-                last.oneCoinPrice.subtract(first.oneCoinPrice).toString() + "zł",
-                last.oneCoinPrice.subtract(first.oneCoinPrice)
-                        .divide(first.oneCoinPrice, 2, RoundingMode.HALF_UP)
-                        .multiply(BigDecimal.valueOf(100))+ "%"
-        ),
-                new Row(new VisualStatistics("Last change",
-                        last.oneCoinPrice.subtract(previous.oneCoinPrice).toString() + "zł",
-                        last.oneCoinPrice.subtract(previous.oneCoinPrice)
-                                .divide(previous.oneCoinPrice, 2, RoundingMode.HALF_UP)
+        List<GoldResponse> response = new ArrayList<>(goldClient.getAllGoldInvestmentValues());
+        if(!response.isEmpty()) {
+            GoldResponse first = response.get(0);
+            GoldResponse last = response.get(response.size() - 1);
+
+            nestedRow = new Row(new VisualStatistics("Entire change",
+                    last.entireValuation.subtract(first.entireValuation).toString() + "zł",
+                    last.entireValuation.subtract(first.entireValuation)
+                            .divide(first.entireValuation, 2, RoundingMode.HALF_UP)
+                            .multiply(BigDecimal.valueOf(100))+ "%"
+            ));
+
+            if(response.size() != 1) {
+                GoldResponse previous = response.get(response.size() - 2);
+
+                nestedRow = new Row(new VisualStatistics("Entire change",
+                        last.entireValuation.subtract(first.entireValuation).toString() + "zł",
+                        last.entireValuation.subtract(first.entireValuation)
+                                .divide(first.entireValuation, 2, RoundingMode.HALF_UP)
                                 .multiply(BigDecimal.valueOf(100))+ "%"
-                )
-                ));
+                ),
+                        new Row(new VisualStatistics("Last change",
+                                last.entireValuation.subtract(previous.entireValuation).toString() + "zł",
+                                last.entireValuation.subtract(previous.entireValuation)
+                                        .divide(previous.entireValuation, 2, RoundingMode.HALF_UP)
+                                        .multiply(BigDecimal.valueOf(100))+ "%"
+                        )
+                        ));
+            }
+
+        }
+
         rootRow.addNestedRow(nestedRow);
         board.add(rootRow);
 

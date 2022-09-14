@@ -34,23 +34,39 @@ public class DevelopedMarketBoard {
         Row rootRow = new Row();
         rootRow.add(chart, 2);
 
-        List<MarketInvestmentResponse> response = new ArrayList<>(developedMarketClient.getDevelopedInvestmentValues());
-        MarketInvestmentResponse first = response.get(0);
-        MarketInvestmentResponse last = response.get(response.size() - 1);
-        MarketInvestmentResponse previous = response.get(response.size() - 2);
+        Row nestedRow = new Row();
 
-        Row nestedRow = new Row(new VisualStatistics("Entire change",
-                last.entireValuation.subtract(first.entireValuation).toString() + "zł",
-                last.entireValuation.subtract(first.entireValuation)
-                        .divide(first.entireValuation, 2, RoundingMode.HALF_UP)
-                        .multiply(BigDecimal.valueOf(100)).toString() + "%"
-        ),
-                new Row(new VisualStatistics("Last change",
-                        last.entireValuation.subtract(previous.entireValuation).toString() + "zł",
-                        last.entireValuation.subtract(previous.entireValuation)
-                                .divide(previous.entireValuation, 2, RoundingMode.HALF_UP)
+        List<MarketInvestmentResponse> response = new ArrayList<>(developedMarketClient.getDevelopedInvestmentValues());
+        if(!response.isEmpty()) {
+            MarketInvestmentResponse first = response.get(0);
+            MarketInvestmentResponse last = response.get(response.size() - 1);
+
+            nestedRow = new Row(new VisualStatistics("Entire change",
+                    last.entireValuation.subtract(first.entireValuation).toString() + "zł",
+                    last.entireValuation.subtract(first.entireValuation)
+                            .divide(first.entireValuation, 2, RoundingMode.HALF_UP)
+                            .multiply(BigDecimal.valueOf(100)).toString() + "%"
+            ));
+
+            if(response.size() != 1) {
+                MarketInvestmentResponse previous = response.get(response.size() - 2);
+
+                nestedRow = new Row(new VisualStatistics("Entire change",
+                        last.entireValuation.subtract(first.entireValuation).toString() + "zł",
+                        last.entireValuation.subtract(first.entireValuation)
+                                .divide(first.entireValuation, 2, RoundingMode.HALF_UP)
                                 .multiply(BigDecimal.valueOf(100)).toString() + "%"
-                )));
+                ),
+                        new Row(new VisualStatistics("Last change",
+                                last.entireValuation.subtract(previous.entireValuation).toString() + "zł",
+                                last.entireValuation.subtract(previous.entireValuation)
+                                        .divide(previous.entireValuation, 2, RoundingMode.HALF_UP)
+                                        .multiply(BigDecimal.valueOf(100)).toString() + "%"
+                        )));
+            }
+
+        }
+
         rootRow.addNestedRow(nestedRow);
         board.add(rootRow);
 

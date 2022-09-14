@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Service
@@ -55,15 +57,19 @@ public class BondsIndexedClient {
                     .retrieve()
                     .bodyToMono(BondsIndexedInvestmentResponse[].class).block();
 
-            return Optional.ofNullable(response)
+            List<BondsIndexedInvestmentResponse> responseList = Optional.ofNullable(response)
                     .map(Arrays::asList)
-                    .orElse(Collections.emptyList())
-                    .get(response.length - 1);
+                    .orElse(Collections.emptyList());
+
+            if(!responseList.isEmpty()) {
+                return responseList.get(responseList.size() - 1);
+            }
 
         } catch (RestClientException e) {
             e.printStackTrace();
             return new BondsIndexedInvestmentResponse();
         }
+        return new BondsIndexedInvestmentResponse();
     }
 
     public List<BondsIndexedInvestmentResponse> getBondInvestmentValues() {

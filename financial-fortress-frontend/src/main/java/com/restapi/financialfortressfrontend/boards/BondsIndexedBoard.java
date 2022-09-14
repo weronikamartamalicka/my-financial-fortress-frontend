@@ -12,8 +12,10 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class BondsIndexedBoard extends Board {
@@ -34,23 +36,41 @@ public class BondsIndexedBoard extends Board {
         Row rootRow = new Row();
         rootRow.add(chart, 2);
 
-        List<BondsIndexedInvestmentResponse> response = new ArrayList<>(bondsIndexedClient.getBondInvestmentValues());
-        BondsIndexedInvestmentResponse first = response.get(0);
-        BondsIndexedInvestmentResponse last = response.get(response.size() - 1);
-        BondsIndexedInvestmentResponse previous = response.get(response.size() - 2);
+        Row nestedRow = new Row();
 
-        Row nestedRow = new Row(new VisualStatistics("Entire change",
-                last.entireValuation.subtract(first.entireValuation).toString() + "zł",
-                last.entireValuation.subtract(first.entireValuation)
-                        .divide(first.entireValuation, 2, RoundingMode.HALF_UP)
-                        .multiply(BigDecimal.valueOf(100)).toString() + "%"
-        ),
-                new Row(new VisualStatistics("Last change",
-                        last.entireValuation.subtract(previous.entireValuation).toString() + "zł",
-                        last.entireValuation.subtract(previous.entireValuation)
-                                .divide(previous.entireValuation, 2, RoundingMode.HALF_UP)
+        List<BondsIndexedInvestmentResponse> response = bondsIndexedClient.getBondInvestmentValues();
+        if(!response.isEmpty()) {
+            BondsIndexedInvestmentResponse first = response.get(0);
+            BondsIndexedInvestmentResponse last = Optional.ofNullable(response.get(response.size() - 1))
+                    .orElse(new BondsIndexedInvestmentResponse(LocalDateTime.now(), BigDecimal.ONE));
+
+            nestedRow = new Row(new VisualStatistics("Entire change",
+                    last.entireValuation.subtract(first.entireValuation).toString() + "zł",
+                    last.entireValuation.subtract(first.entireValuation)
+                            .divide(first.entireValuation, 2, RoundingMode.HALF_UP)
+                            .multiply(BigDecimal.valueOf(100)).toString() + "%"
+            ));
+
+            if(response.size() != 1) {
+                BondsIndexedInvestmentResponse previous = Optional.ofNullable(response.get(response.size() - 2))
+                        .orElse(new BondsIndexedInvestmentResponse(LocalDateTime.now(), BigDecimal.ONE));
+
+                nestedRow = new Row(new VisualStatistics("Entire change",
+                        last.entireValuation.subtract(first.entireValuation).toString() + "zł",
+                        last.entireValuation.subtract(first.entireValuation)
+                                .divide(first.entireValuation, 2, RoundingMode.HALF_UP)
                                 .multiply(BigDecimal.valueOf(100)).toString() + "%"
-                )));
+                ),
+                        new Row(new VisualStatistics("Last change",
+                                last.entireValuation.subtract(previous.entireValuation).toString() + "zł",
+                                last.entireValuation.subtract(previous.entireValuation)
+                                        .divide(previous.entireValuation, 2, RoundingMode.HALF_UP)
+                                        .multiply(BigDecimal.valueOf(100)).toString() + "%"
+                        )));
+            }
+
+        }
+
         rootRow.addNestedRow(nestedRow);
         board.add(rootRow);
 

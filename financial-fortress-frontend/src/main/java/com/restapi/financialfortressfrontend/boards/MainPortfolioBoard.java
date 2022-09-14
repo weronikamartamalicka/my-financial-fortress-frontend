@@ -62,30 +62,46 @@ public class MainPortfolioBoard extends Board {
         options.setCenter("50%", "50%");
         conf.setPlotOptions(options);
 
-        List<PortfolioValuesResponse> response = new ArrayList<>(modelPortfolioClient.getAllPortfolioValues());
-        PortfolioValuesResponse first = response.get(0);
-        PortfolioValuesResponse last = response.get(response.size() - 1);
-        PortfolioValuesResponse previous = response.get(response.size() - 2);
-
         Row rootRow = new Row();
-        rootRow.add(chart, 2);
+        Row nestedRow = new Row();
 
-        Row nestedRow = new Row(new VisualStatistics("Entire change",
-                last.entireValue.subtract(first.entireValue).toString() + "zł",
-                last.entireValue.subtract(first.entireValue)
-                        .divide(first.entireValue, 2, RoundingMode.HALF_UP)
-                        .multiply(BigDecimal.valueOf(100))
-                        .toString() + "%"
-                ),
-                new Row(new VisualStatistics("Last change",
-                        last.entireValue.subtract(previous.entireValue).toString() + "zł",
-                        last.entireValue.subtract(previous.entireValue)
-                                .divide(previous.entireValue, 2, RoundingMode.HALF_UP)
+        List<PortfolioValuesResponse> response = new ArrayList<>(modelPortfolioClient.getAllPortfolioValues());
+        if(!response.isEmpty()) {
+            PortfolioValuesResponse first = response.get(0);
+            PortfolioValuesResponse last = response.get(response.size() - 1);
+
+            nestedRow = new Row(new VisualStatistics("Entire change",
+                    last.entireValue.subtract(first.entireValue).toString() + "zł",
+                    last.entireValue.subtract(first.entireValue)
+                            .divide(first.entireValue, 2, RoundingMode.HALF_UP)
+                            .multiply(BigDecimal.valueOf(100))
+                            .toString() + "%"
+            ));
+
+            if(response.size() != 1) {
+                PortfolioValuesResponse previous = response.get(response.size() - 2);
+
+                nestedRow = new Row(new VisualStatistics("Entire change",
+                        last.entireValue.subtract(first.entireValue).toString() + "zł",
+                        last.entireValue.subtract(first.entireValue)
+                                .divide(first.entireValue, 2, RoundingMode.HALF_UP)
                                 .multiply(BigDecimal.valueOf(100))
                                 .toString() + "%"
-                )
-                ));
+                ),
+                        new Row(new VisualStatistics("Last change",
+                                last.entireValue.subtract(previous.entireValue).toString() + "zł",
+                                last.entireValue.subtract(previous.entireValue)
+                                        .divide(previous.entireValue, 2, RoundingMode.HALF_UP)
+                                        .multiply(BigDecimal.valueOf(100))
+                                        .toString() + "%"
+                        )
+                        ));
+            }
+
+        }
+
         rootRow.addNestedRow(nestedRow);
+        rootRow.add(chart, 2);
         board.add(rootRow);
 
         return board;

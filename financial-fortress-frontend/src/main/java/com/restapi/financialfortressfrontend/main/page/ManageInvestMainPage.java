@@ -33,6 +33,11 @@ public class ManageInvestMainPage extends VerticalLayout {
         Button removePortfolio = new Button("close investment", new Icon(VaadinIcon.CLOSE_CIRCLE_O));
         removePortfolio.getElement().addEventListener("click", e -> {
             modelPortfolioClient.deletePortfolio();
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException ex) {
+                throw new RuntimeException(ex);
+            }
             removePortfolio.getUI().ifPresent(ui -> ui.navigate("home2"));
         });
         Button updateMarketValues = new Button("update market values", new Icon(VaadinIcon.BAR_CHART));
