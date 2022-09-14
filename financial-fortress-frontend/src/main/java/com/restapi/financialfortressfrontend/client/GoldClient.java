@@ -13,6 +13,17 @@ public class GoldClient {
 
     private final static String API_ROOT = "http://localhost:8080/v1/gold/";
 
+    public void updateValues() {
+        WebClient webClient = WebClient.builder().baseUrl(API_ROOT + "/value").build();
+        try {
+            webClient.post()
+                    .retrieve()
+                    .bodyToMono(Void.class);
+        } catch (RestClientException e) {
+            e.printStackTrace();
+        }
+    }
+
     public Set<GoldResponse> getAllGoldValues() {
 
         WebClient webClient = WebClient.builder().baseUrl(API_ROOT + "value").build();

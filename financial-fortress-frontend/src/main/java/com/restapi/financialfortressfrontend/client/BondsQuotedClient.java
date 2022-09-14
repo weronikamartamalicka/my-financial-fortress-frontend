@@ -12,6 +12,17 @@ public class BondsQuotedClient {
 
     private final static String API_ROOT = "http://localhost:8080/v1/bonds";
 
+    public void updateValues() {
+        WebClient webClient = WebClient.builder().baseUrl(API_ROOT + "/quoted/value").build();
+        try {
+            webClient.post()
+                    .retrieve()
+                    .bodyToMono(Void.class);
+        } catch (RestClientException e) {
+            e.printStackTrace();
+        }
+    }
+
     public Set<BondsResponse> getAllBondsValues() {
 
         WebClient webClient = WebClient.builder().baseUrl(API_ROOT + "/quoted/value").build();

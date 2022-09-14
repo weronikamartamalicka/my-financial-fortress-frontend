@@ -35,14 +35,10 @@ public class EmergingMarketChart extends Chart{
 
         XAxis xaxis = new XAxis();
 
-        emergingMarketClient.getAllEmergingValues().stream()
-                .forEach(bondsResponse -> {
-                    xaxis.addCategory(bondsResponse.date.toString());
-                });
-
         emergingMarketClient.getEmergingInvestmentValues().stream()
                 .forEach(bondsResponse -> {
-                    series.add(new DataSeriesItem("date", bondsResponse.entireValuation));
+                    series.add(new DataSeriesItem("EmergingMarketETF", bondsResponse.entireValuation));
+                    xaxis.addCategory(bondsResponse.date.toString());
                 });
 
         conf.addSeries(series);

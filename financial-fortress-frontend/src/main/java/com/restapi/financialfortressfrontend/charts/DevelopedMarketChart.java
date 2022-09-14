@@ -35,14 +35,10 @@ public class DevelopedMarketChart extends Chart {
 
         XAxis xaxis = new XAxis();
 
-        developedMarketClient.getAllDevelopedValues().stream()
-                .forEach(bondsResponse -> {
-                    xaxis.addCategory(bondsResponse.date.toString());
-                });
-
         developedMarketClient.getDevelopedInvestmentValues().stream()
                 .forEach(bondsResponse -> {
-                    series.add(new DataSeriesItem("date", bondsResponse.entireValuation));
+                    series.add(new DataSeriesItem("DevelopedMarketETF", bondsResponse.entireValuation));
+                    xaxis.addCategory(bondsResponse.date.toString());
                 });
 
         conf.addSeries(series);

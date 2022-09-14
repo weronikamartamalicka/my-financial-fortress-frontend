@@ -13,6 +13,17 @@ public class BondsIndexedClient {
 
     private final static String API_ROOT = "http://localhost:8080/v1/inflation";
 
+    public void updateValues() {
+        WebClient webClient = WebClient.builder().baseUrl(API_ROOT + "/value").build();
+        try {
+            webClient.post()
+                    .retrieve()
+                    .bodyToMono(Void.class);
+        } catch (RestClientException e) {
+            e.printStackTrace();
+        }
+    }
+
     public Set<BondsIndexedResponse> getAllInflationValues() {
 
         WebClient webClient = WebClient.builder().baseUrl(API_ROOT + "/value").build();

@@ -34,14 +34,10 @@ public class BondQuotedChart extends Chart {
 
         XAxis xaxis = new XAxis();
 
-        bondsQuotedClient.getAllBondsValues().stream()
-                .forEach(bondsResponse -> {
-                    xaxis.addCategory(bondsResponse.date.toString());
-                });
-
         bondsQuotedClient.getBondInvestmentValues().stream()
                 .forEach(bondsResponse -> {
-                    series.add(new DataSeriesItem("date", bondsResponse.entireValuation));
+                    series.add(new DataSeriesItem("BondsQuotedInvestment", bondsResponse.entireValuation));
+                    xaxis.addCategory(bondsResponse.date.toString());
                 });
 
         conf.addSeries(series);

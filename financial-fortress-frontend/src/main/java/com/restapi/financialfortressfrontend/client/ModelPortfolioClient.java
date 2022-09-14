@@ -5,11 +5,34 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 @Service
 public class ModelPortfolioClient {
     private final static String API_ROOT = "http://localhost:8080/v1/";
+
+    public void deletePortfolio() {
+        WebClient webClient = WebClient.builder().baseUrl(API_ROOT + "portfolio").build();
+        try {
+            webClient.delete()
+                    .retrieve()
+                    .bodyToMono(Void.class);
+        } catch (RestClientException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void createPortfolio(Long capital) {
+        WebClient webClient = WebClient.builder().baseUrl(API_ROOT + "portfolio/" + capital).build();
+        try {
+            webClient.post()
+                    .retrieve()
+                    .bodyToMono(Void.class);
+        } catch (RestClientException e) {
+            e.printStackTrace();
+        }
+    }
 
     public PortfolioValuesResponse getActualPortfolioValues() {
 

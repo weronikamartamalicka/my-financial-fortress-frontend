@@ -20,16 +20,19 @@ public class HomePage extends AppLayout {
     private EmergingMarketMainPage emergingMarketMainPage;
     private DevelopedMarketMainPage developedMarketMainPage;
     private BondsIndexedMainPage bondsIndexedMainPage;
+    private ManageInvestMainPage manageInvestMainPage;
     @Autowired
     public HomePage(PortfolioMainPage portfolioMainPage, GoldMainPage goldMainPage,
                     BondsQuotedMainPage bondsQuotedMainPage, EmergingMarketMainPage emergingMarketMainPage,
-                    DevelopedMarketMainPage developedMarketMainPage, BondsIndexedMainPage bondsIndexedMainPage) {
+                    DevelopedMarketMainPage developedMarketMainPage, BondsIndexedMainPage bondsIndexedMainPage,
+                    ManageInvestMainPage manageInvestMainPage) {
         this.portfolioMainPage = portfolioMainPage;
         this.goldMainPage = goldMainPage;
         this.bondsQuotedMainPage = bondsQuotedMainPage;
         this.emergingMarketMainPage = emergingMarketMainPage;
         this.developedMarketMainPage = developedMarketMainPage;
         this.bondsIndexedMainPage = bondsIndexedMainPage;
+        this.manageInvestMainPage = manageInvestMainPage;
 
         DrawerToggle toggle = new DrawerToggle();
 
@@ -81,7 +84,12 @@ public class HomePage extends AppLayout {
             remove(portfolioMainPage);
             setContent(developedMarketMainPage);
         });
+        Tab managePortfolios = new Tab(VaadinIcon.COG_O.create(), new Span("Manage investments"));
+        managePortfolios.getElement().addEventListener("click", e-> {
+            remove(portfolioMainPage);
+            setContent(manageInvestMainPage);
+        });
 
-        return new Tabs(home, gold, bondsQuoted, bondsIndexed, emergingMarket, developedMarket);
+        return new Tabs(home, gold, bondsQuoted, bondsIndexed, emergingMarket, developedMarket, managePortfolios);
     }
 }
