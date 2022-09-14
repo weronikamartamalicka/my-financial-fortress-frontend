@@ -5,13 +5,20 @@ import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.page.Page;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.server.VaadinSession;
+import com.vaadin.flow.spring.annotation.SpringComponent;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
 
 
 @Route("home")
+@SpringComponent
+@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class HomePage extends AppLayout {
 
     private PortfolioMainPage portfolioMainPage;
@@ -33,6 +40,10 @@ public class HomePage extends AppLayout {
         this.developedMarketMainPage = developedMarketMainPage;
         this.bondsIndexedMainPage = bondsIndexedMainPage;
         this.manageInvestMainPage = manageInvestMainPage;
+
+        if(getParent().isPresent()) {
+            remove(getParent().get());
+        }
 
         DrawerToggle toggle = new DrawerToggle();
 
@@ -61,32 +72,32 @@ public class HomePage extends AppLayout {
         });
         Tab gold = new Tab(VaadinIcon.PIGGY_BANK_COIN.create(), new Span("Gold"));
         gold.getElement().addEventListener("click", e -> {
-            remove(portfolioMainPage);
+            remove(getParent().get());
             setContent(goldMainPage);
         });
         Tab bondsQuoted = new Tab(VaadinIcon.DIPLOMA.create(), new Span("BondsQuoted"));
         bondsQuoted.getElement().addEventListener("click", e -> {
-            remove(portfolioMainPage);
+            remove(getParent().get());
             setContent(bondsQuotedMainPage);
         });
         Tab bondsIndexed = new Tab(VaadinIcon.INSTITUTION.create(), new Span("BondsIndexed"));
         bondsIndexed.getElement().addEventListener("click", e -> {
-            remove(portfolioMainPage);
+            remove(getParent().get());
             setContent(bondsIndexedMainPage);
         });
         Tab emergingMarket = new Tab(VaadinIcon.BUILDING_O.create(), new Span("EmergingMarketETF"));
         emergingMarket.getElement().addEventListener("click", e -> {
-            remove(portfolioMainPage);
+            remove(getParent().get());
             setContent(emergingMarketMainPage);
         });
         Tab developedMarket = new Tab(VaadinIcon.BUILDING.create(), new Span("DevelopedMarketETF"));
         developedMarket.getElement().addEventListener("click", e -> {
-            remove(portfolioMainPage);
+            remove(getParent().get());
             setContent(developedMarketMainPage);
         });
         Tab managePortfolios = new Tab(VaadinIcon.COG_O.create(), new Span("Manage investments"));
         managePortfolios.getElement().addEventListener("click", e-> {
-            remove(portfolioMainPage);
+            remove(getParent().get());
             setContent(manageInvestMainPage);
         });
 

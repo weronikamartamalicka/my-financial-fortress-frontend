@@ -22,11 +22,11 @@ public class HelloPage extends VerticalLayout {
 
         public HelloPage2() {
             Button buttonCreateInvest = new Button("No, I have not! Let's create one!");
-            buttonCreateInvest.getElement().addEventListener("click", e -> {
+            buttonCreateInvest.addClickListener(e -> {
                 buttonCreateInvest.getUI().ifPresent(ui -> ui.navigate("home2"));
             });
             Button buttonAnalyzeInvest = new Button("Yup! I want to have a look at my portfolio");
-            buttonAnalyzeInvest.getElement().addEventListener("click", e -> {
+            buttonAnalyzeInvest.addClickListener(e -> {
                 buttonAnalyzeInvest.getUI().ifPresent(ui -> ui.navigate("home"));
             });
 

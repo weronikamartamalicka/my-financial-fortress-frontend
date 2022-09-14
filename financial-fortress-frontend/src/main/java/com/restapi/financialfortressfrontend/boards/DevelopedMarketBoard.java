@@ -4,10 +4,12 @@ import com.restapi.financialfortressfrontend.VisualStatistics;
 import com.restapi.financialfortressfrontend.charts.DevelopedMarketChart;
 import com.restapi.financialfortressfrontend.client.DevelopedMarketClient;
 import com.restapi.financialfortressfrontend.domain.dto.MarketInvestmentResponse;
+import com.restapi.financialfortressfrontend.main.page.HomePage;
 import com.vaadin.flow.component.board.Board;
 import com.vaadin.flow.component.board.Row;
 import com.vaadin.flow.component.charts.Chart;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -26,7 +28,7 @@ public class DevelopedMarketBoard {
         this.developedMarketClient = developedMarketClient;
         this.developedMarketChart = developedMarketChart;
     }
-
+    @EventListener(HomePage.class)
     public Board getBoard() {
         Board board = new Board();
         Chart chart = developedMarketChart.getChart();

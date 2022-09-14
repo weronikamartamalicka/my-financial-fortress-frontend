@@ -9,13 +9,16 @@ import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.spring.annotation.SpringComponent;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
-import java.math.BigDecimal;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
+
 import java.util.Optional;
 
-@Component
+@SpringComponent
+@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class BondsIndexedMainPage extends VerticalLayout {
 
     private BondsIndexedClient bondsIndexedClient;

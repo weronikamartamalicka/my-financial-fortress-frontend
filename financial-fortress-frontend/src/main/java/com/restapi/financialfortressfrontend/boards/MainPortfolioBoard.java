@@ -3,11 +3,13 @@ package com.restapi.financialfortressfrontend.boards;
 import com.restapi.financialfortressfrontend.VisualStatistics;
 import com.restapi.financialfortressfrontend.client.ModelPortfolioClient;
 import com.restapi.financialfortressfrontend.domain.dto.PortfolioValuesResponse;
+import com.restapi.financialfortressfrontend.main.page.HomePage;
 import com.vaadin.flow.component.board.Board;
 import com.vaadin.flow.component.board.Row;
 import com.vaadin.flow.component.charts.Chart;
 import com.vaadin.flow.component.charts.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -25,7 +27,7 @@ public class MainPortfolioBoard extends Board {
     public MainPortfolioBoard(ModelPortfolioClient modelPortfolioClient) {
         this.modelPortfolioClient = modelPortfolioClient;
     }
-
+    @EventListener(HomePage.class)
     public Board getBoard() {
         Chart chart = new Chart(ChartType.LINE);
         Board board = new Board();

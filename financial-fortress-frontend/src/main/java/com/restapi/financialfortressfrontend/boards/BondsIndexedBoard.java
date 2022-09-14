@@ -4,16 +4,17 @@ import com.restapi.financialfortressfrontend.VisualStatistics;
 import com.restapi.financialfortressfrontend.charts.BondsIndexedChart;
 import com.restapi.financialfortressfrontend.client.BondsIndexedClient;
 import com.restapi.financialfortressfrontend.domain.dto.BondsIndexedInvestmentResponse;
+import com.restapi.financialfortressfrontend.main.page.HomePage;
 import com.vaadin.flow.component.board.Board;
 import com.vaadin.flow.component.board.Row;
 import com.vaadin.flow.component.charts.Chart;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,7 +29,7 @@ public class BondsIndexedBoard extends Board {
         this.bondsIndexedClient = bondsIndexedClient;
         this.bondsIndexedChart = bondsIndexedChart;
     }
-
+    @EventListener(HomePage.class)
     public Board getBoard() {
         Board board = new Board();
         Chart chart = bondsIndexedChart.getChart();

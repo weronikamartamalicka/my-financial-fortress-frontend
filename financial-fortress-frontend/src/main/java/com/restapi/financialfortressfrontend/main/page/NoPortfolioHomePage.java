@@ -35,7 +35,7 @@ public class NoPortfolioHomePage extends HorizontalLayout {
             selectCapital.setWidth("100");
 
             Button button = new Button("Create my LONG-TERM portfolio");
-            button.getElement().addEventListener("click", e -> {
+            button.addClickListener(e -> {
                 modelPortfolioClient.createPortfolio(selectCapital.getValue());
                 button.getUI().ifPresent(ui -> ui.navigate("home"));
             });
