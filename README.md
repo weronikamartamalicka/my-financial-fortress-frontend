@@ -13,5 +13,5 @@ localhost:8080/v1/developed/value POST - to update all market values
 
 The main frontend page, from where you need to start the adventure with the application, is at Route("").
 
-Due to the fact that the full functionality, any charts, changes are visible only after some time, I provide my data from the database.
+Due to the fact that the full functionality, any charts, changes are visible only after some time, I provide my data from the database :https://github.com/weronikamartamalicka/my-financial-fortress-backend/tree/main/Application%20database%20data
 
