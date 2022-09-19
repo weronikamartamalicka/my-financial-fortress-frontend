@@ -16,7 +16,8 @@ public class ModelPortfolioClient {
         try {
             webClient.delete()
                     .retrieve()
-                    .bodyToMono(Void.class);
+                    .bodyToMono(Void.class)
+                    .block();
         } catch (RestClientException e) {
             e.printStackTrace();
         }
@@ -27,7 +28,8 @@ public class ModelPortfolioClient {
         try {
             webClient.post()
                     .retrieve()
-                    .bodyToMono(Void.class);
+                    .bodyToMono(Void.class)
+                    .block();
         } catch (RestClientException e) {
             e.printStackTrace();
         }

@@ -20,7 +20,8 @@ public class BondsIndexedClient {
         try {
             webClient.post()
                     .retrieve()
-                    .bodyToMono(Void.class);
+                    .bodyToMono(Void.class)
+                    .block();
         } catch (RestClientException e) {
             e.printStackTrace();
         }

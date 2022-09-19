@@ -37,13 +37,9 @@ public class BondsIndexedChart extends Chart {
 
         XAxis xaxis = new XAxis();
 
-        bondsIndexedClient.getAllInflationValues().stream()
-                .forEach(bondsResponse -> {
-                    xaxis.addCategory(bondsResponse.date.toString());
-                });
-
         bondsIndexedClient.getBondInvestmentValues().stream()
                 .forEach(bondsResponse -> {
+                    xaxis.addCategory(bondsResponse.date.toString());
                     series.add(new DataSeriesItem("entireValuation", bondsResponse.entireValuation));
                 });
 

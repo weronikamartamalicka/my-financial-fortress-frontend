@@ -102,8 +102,8 @@ public class MainPortfolioBoard extends Board {
 
         }
 
-        rootRow.addNestedRow(nestedRow);
         rootRow.add(chart, 2);
+        rootRow.addNestedRow(nestedRow);
         board.add(rootRow);
 
         return board;
