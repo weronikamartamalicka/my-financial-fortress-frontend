@@ -20,7 +20,6 @@ import java.util.Optional;
 
 @Component
 public class BondsIndexedBoard extends Board {
-
     private BondsIndexedClient bondsIndexedClient;
     private BondsIndexedChart bondsIndexedChart;
 
@@ -69,9 +68,7 @@ public class BondsIndexedBoard extends Board {
                                         .multiply(BigDecimal.valueOf(100)).toString() + "%"
                         )));
             }
-
         }
-
         rootRow.addNestedRow(nestedRow);
         board.add(rootRow);
 

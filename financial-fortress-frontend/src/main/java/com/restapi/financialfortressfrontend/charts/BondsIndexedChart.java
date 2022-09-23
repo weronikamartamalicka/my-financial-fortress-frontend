@@ -1,7 +1,6 @@
 package com.restapi.financialfortressfrontend.charts;
 
 import com.restapi.financialfortressfrontend.client.BondsIndexedClient;
-import com.restapi.financialfortressfrontend.client.BondsQuotedClient;
 import com.vaadin.flow.component.charts.Chart;
 import com.vaadin.flow.component.charts.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import java.math.BigDecimal;
 
 @Component
 public class BondsIndexedChart extends Chart {
-
     private BondsIndexedClient bondsIndexedClient;
 
     @Autowired

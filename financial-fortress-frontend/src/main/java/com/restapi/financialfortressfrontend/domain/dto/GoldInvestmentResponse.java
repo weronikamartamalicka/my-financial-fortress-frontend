@@ -12,7 +12,6 @@ public class GoldInvestmentResponse {
 
     @JsonProperty("type")
     public String type;
-
     @JsonProperty("quantity")
     public BigDecimal quantity;
 

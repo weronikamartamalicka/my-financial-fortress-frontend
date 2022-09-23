@@ -19,7 +19,6 @@ import java.util.List;
 
 @Component
 public class EmergingMarketBoard extends Board {
-
     private EmergingMarketClient emergingMarketClient;
     private EmergingMarketChart emergingMarketChart;
 
@@ -68,7 +67,6 @@ public class EmergingMarketBoard extends Board {
             }
 
         }
-
         rootRow.addNestedRow(nestedRow);
         board.add(rootRow);
 

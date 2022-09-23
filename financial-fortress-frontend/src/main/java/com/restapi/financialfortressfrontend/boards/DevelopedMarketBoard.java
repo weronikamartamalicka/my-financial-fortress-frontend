@@ -19,7 +19,6 @@ import java.util.List;
 
 @Component
 public class DevelopedMarketBoard {
-
     private DevelopedMarketClient developedMarketClient;
     private DevelopedMarketChart developedMarketChart;
 
@@ -68,7 +67,6 @@ public class DevelopedMarketBoard {
             }
 
         }
-
         rootRow.addNestedRow(nestedRow);
         board.add(rootRow);
 

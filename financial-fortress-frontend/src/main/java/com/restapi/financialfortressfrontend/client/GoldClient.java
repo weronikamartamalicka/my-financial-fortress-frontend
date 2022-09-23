@@ -44,7 +44,6 @@ public class GoldClient {
             e.printStackTrace();
             return Collections.emptyList();
         }
-
     }
 
     public GoldInvestmentResponse getActualInvestInfo() {

@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class GoldValuesChart extends Chart {
     private GoldClient goldClient;
-
     @Autowired
     public GoldValuesChart(GoldClient goldClient) {
         this.goldClient = goldClient;

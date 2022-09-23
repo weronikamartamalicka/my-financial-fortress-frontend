@@ -19,7 +19,6 @@ import java.util.List;
 
 @Component
 public class BondsQuotedBoard extends Board {
-
     private BondsQuotedClient bondsQuotedClient;
     private BondQuotedChart bondQuotedChart;
 
@@ -67,7 +66,6 @@ public class BondsQuotedBoard extends Board {
                         )));
             }
         }
-
         rootRow.addNestedRow(nestedRow);
         board.add(rootRow);
 

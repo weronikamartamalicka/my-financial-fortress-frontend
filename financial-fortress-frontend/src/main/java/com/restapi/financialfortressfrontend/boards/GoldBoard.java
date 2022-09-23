@@ -19,7 +19,6 @@ import java.util.List;
 
 @Component
 public class GoldBoard extends Board {
-
     private GoldClient goldClient;
     private GoldValuesChart goldValuesChart;
 
@@ -69,7 +68,6 @@ public class GoldBoard extends Board {
             }
 
         }
-
         rootRow.addNestedRow(nestedRow);
         board.add(rootRow);
 

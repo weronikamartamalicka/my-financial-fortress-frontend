@@ -45,7 +45,6 @@ public class EmergingMarketClient {
             e.printStackTrace();
             return Collections.emptySet();
         }
-
     }
 
     public MarketInvestmentResponse getActualInvestInfo() {
@@ -69,7 +68,6 @@ public class EmergingMarketClient {
             e.printStackTrace();
             return new MarketInvestmentResponse();
         }
-
         return new MarketInvestmentResponse();
     }
 
@@ -91,6 +89,5 @@ public class EmergingMarketClient {
             e.printStackTrace();
             return Collections.emptyList();
         }
-
     }
 }

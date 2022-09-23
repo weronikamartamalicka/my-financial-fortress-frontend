@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class BondQuotedChart extends Chart {
-
     private BondsQuotedClient bondsQuotedClient;
 
     @Autowired

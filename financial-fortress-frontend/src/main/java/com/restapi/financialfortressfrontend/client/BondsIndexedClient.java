@@ -6,8 +6,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.*;
 
 @Service
@@ -91,6 +89,5 @@ public class BondsIndexedClient {
             e.printStackTrace();
             return Collections.emptyList();
         }
-
     }
 }

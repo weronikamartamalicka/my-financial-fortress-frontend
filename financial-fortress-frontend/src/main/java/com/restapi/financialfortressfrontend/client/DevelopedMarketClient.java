@@ -90,6 +90,5 @@ public class DevelopedMarketClient {
             e.printStackTrace();
             return Collections.emptyList();
         }
-
     }
 }

@@ -1,6 +1,6 @@
 package com.restapi.financialfortressfrontend.main.page;
 
-import com.restapi.financialfortressfrontend.client.ModelPortfolioClient;
+import com.restapi.financialfortressfrontend.client.*;
 import com.restapi.financialfortressfrontend.domain.dto.InvestmentCapital;
 import com.restapi.financialfortressfrontend.domain.dto.Video;
 import com.vaadin.flow.component.HasText;
@@ -19,11 +19,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 @StyleSheet("/css/style2.css")
 public class NoPortfolioHomePage extends HorizontalLayout {
 
-    private ModelPortfolioClient modelPortfolioClient;
+    private final ModelPortfolioClient modelPortfolioClient;
+    private final BondsIndexedClient bondsIndexedClient;
+    private final BondsQuotedClient bondsQuotedClient;
+    private final DevelopedMarketClient developedMarketClient;
+    private final EmergingMarketClient emergingMarketClient;
+    private final GoldClient goldClient;
 
     @Autowired
-    public NoPortfolioHomePage(ModelPortfolioClient modelPortfolioClient) {
+    public NoPortfolioHomePage(ModelPortfolioClient modelPortfolioClient, BondsIndexedClient bondsIndexedClient,
+                               BondsQuotedClient bondsQuotedClient, DevelopedMarketClient developedMarketClient,
+                               EmergingMarketClient emergingMarketClient, GoldClient goldClient) {
         this.modelPortfolioClient = modelPortfolioClient;
+        this.developedMarketClient = developedMarketClient;
+        this.goldClient = goldClient;
+        this.bondsIndexedClient = bondsIndexedClient;
+        this.bondsQuotedClient = bondsQuotedClient;
+        this.emergingMarketClient = emergingMarketClient;
 
         Video video = new Video("img/movie3.mp4");
         video.setHeight(50, Unit.PERCENTAGE);
@@ -36,7 +48,6 @@ public class NoPortfolioHomePage extends HorizontalLayout {
         add(new NoPortfolioHomePage2());
         setAlignItems(Alignment.CENTER);
         setJustifyContentMode(JustifyContentMode.END);
-
     }
 
     private class NoPortfolioHomePage2 extends VerticalLayout {
@@ -49,15 +60,22 @@ public class NoPortfolioHomePage extends HorizontalLayout {
 
             Button button = new Button("BUILD FORTRESS");
             button.addClickListener(e -> {
+                bondsQuotedClient.updateValues();
+                bondsIndexedClient.updateValues();
+                developedMarketClient.updateValues();
+                emergingMarketClient.updateValues();
+                goldClient.updateValues();
                 modelPortfolioClient.createPortfolio(selectCapital.getValue());
                 button.getUI().ifPresent(ui -> ui.navigate("home"));
             });
+
             button.setHeight("50");
 
             H2 header = new H2("How to put together investment puzzles?");
-
-            Image image = new Image("https://marciniwuc.com/wp-content/webp-express/webp-images/uploads/2020/12/portfel-lt.jpg.webp",
+            Image image = new Image("https://marciniwuc.com/wp-content/webp-express/" +
+                    "webp-images/uploads/2020/12/portfel-lt.jpg.webp",
                     "Cannot load image");
+
             image.setHeight(70, Unit.PERCENTAGE);
             image.setWidth(70, Unit.PERCENTAGE);
 

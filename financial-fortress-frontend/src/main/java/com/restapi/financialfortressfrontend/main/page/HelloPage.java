@@ -14,7 +14,6 @@ public class HelloPage extends HorizontalLayout {
     public HelloPage() {
 
         add(new HelloPage2());
-
         Image image = new Image("https://finansowaforteca.pl/wp-content/webp-express/" +
                 "webp-images/uploads/2022/09/FinForteca_mockup_3-low-res-2022-new.jpg.webp",
                 "Cannot load image");

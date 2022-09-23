@@ -21,9 +21,9 @@ import java.util.Optional;
 @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class BondsIndexedMainPage extends VerticalLayout {
 
-    private BondsIndexedClient bondsIndexedClient;
-    private BondsIndexedBoard bondsIndexedBoard;
-    private BondsIndexedChart bondsIndexedChart;
+    private final BondsIndexedClient bondsIndexedClient;
+    private final BondsIndexedBoard bondsIndexedBoard;
+    private final BondsIndexedChart bondsIndexedChart;
 
     @Autowired
     public BondsIndexedMainPage(BondsIndexedClient bondsIndexedClient, BondsIndexedBoard bondsIndexedBoard,
@@ -50,19 +50,11 @@ public class BondsIndexedMainPage extends VerticalLayout {
                 quantity.getElement().getThemeList().add("badge contrast pill");
                 Span redemptionDate = new Span("Redemption date: " + investment.redemptionDate);
                 redemptionDate.getElement().getThemeList().add("badge contrast pill");
-                //Span interestRate = new Span("First year interest rate: " + investment.firstYearInterestRate
-                        //.multiply(BigDecimal.valueOf(100)) + "%");
-                //interestRate.getElement().getThemeList().add("badge contrast pill");
-                //Span interestRate2 = new Span("Interest rate: " + investment.interestRate
-                        //.multiply(BigDecimal.valueOf(100)) + "%");
-                //interestRate2.getElement().getThemeList().add("badge contrast pill");
 
                 add(icon);
                 add(type);
                 add(quantity);
                 add(redemptionDate);
-                //add(interestRate);
-                //add(interestRate2);
             }
         }
     }

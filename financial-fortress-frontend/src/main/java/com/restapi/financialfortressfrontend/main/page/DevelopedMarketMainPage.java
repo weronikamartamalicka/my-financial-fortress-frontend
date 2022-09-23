@@ -12,14 +12,13 @@ import com.vaadin.flow.spring.annotation.SpringComponent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 
 @SpringComponent
 @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class DevelopedMarketMainPage extends VerticalLayout {
 
-    private DevelopedMarketBoard developedMarketBoard;
-    private DevelopedMarketClient developedMarketClient;
+    private final DevelopedMarketBoard developedMarketBoard;
+    private final DevelopedMarketClient developedMarketClient;
 
     @Autowired
     public DevelopedMarketMainPage(DevelopedMarketBoard developedMarketBoard, DevelopedMarketClient developedMarketClient) {

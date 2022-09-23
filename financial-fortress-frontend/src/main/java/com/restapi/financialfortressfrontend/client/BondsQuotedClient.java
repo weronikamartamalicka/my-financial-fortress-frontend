@@ -44,7 +44,6 @@ public class BondsQuotedClient {
             e.printStackTrace();
             return Collections.emptySet();
         }
-
     }
 
     public BondsInvestmentResponse getActualInvestInfo() {
@@ -89,7 +88,5 @@ public class BondsQuotedClient {
             e.printStackTrace();
             return Collections.emptyList();
         }
-
     }
-
 }

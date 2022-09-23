@@ -9,8 +9,6 @@ import com.vaadin.flow.spring.annotation.SpringComponent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
-import org.springframework.context.event.EventListener;
-import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 
@@ -18,10 +16,9 @@ import java.math.BigDecimal;
 @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class PortfolioMainPage extends VerticalLayout {
 
-    private MainPortfolioChart homeChart;
-    private MainPortfolioBoard homeBoard;
-
-    private ModelPortfolioClient modelPortfolioClient;
+    private final MainPortfolioChart homeChart;
+    private final MainPortfolioBoard homeBoard;
+    private final ModelPortfolioClient modelPortfolioClient;
 
     @Autowired
     public PortfolioMainPage(MainPortfolioChart homeChart, MainPortfolioBoard homeBoard,
@@ -35,7 +32,6 @@ public class PortfolioMainPage extends VerticalLayout {
         add(new Text("Entire Value : " + entireValue + " zł"));
         add(homeChart.getChart());
         add(homeBoard.getBoard());
-
     }
 }
 

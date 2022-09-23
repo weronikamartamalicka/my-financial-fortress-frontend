@@ -8,14 +8,12 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class EmergingMarketChart extends Chart{
-
     private EmergingMarketClient emergingMarketClient;
 
     @Autowired
     public EmergingMarketChart(EmergingMarketClient emergingMarketClient) {
         this.emergingMarketClient = emergingMarketClient;
     }
-
 
     public Chart getChart() {
         Chart chart = new Chart(ChartType.LINE);

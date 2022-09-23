@@ -16,12 +16,12 @@ import org.springframework.context.annotation.Scope;
 @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class ManageInvestMainPage extends VerticalLayout {
 
-    private ModelPortfolioClient modelPortfolioClient;
-    private BondsIndexedClient bondsIndexedClient;
-    private BondsQuotedClient bondsQuotedClient;
-    private EmergingMarketClient emergingMarketClient;
-    private DevelopedMarketClient developedMarketClient;
-    private GoldClient goldClient;
+    private final ModelPortfolioClient modelPortfolioClient;
+    private final BondsIndexedClient bondsIndexedClient;
+    private final BondsQuotedClient bondsQuotedClient;
+    private final EmergingMarketClient emergingMarketClient;
+    private final DevelopedMarketClient developedMarketClient;
+    private final GoldClient goldClient;
 
 
     @Autowired
@@ -51,6 +51,7 @@ public class ManageInvestMainPage extends VerticalLayout {
             Notification.show("Values have been updated");
             UI.getCurrent().getPage().reload();
         });
+
         Button updateInflationIndexedBonds = new Button("update inflation indexed bonds", new Icon(VaadinIcon.BAR_CHART_H));
         updateInflationIndexedBonds.addClickListener(clickEvent -> {
             bondsIndexedClient.updateValues();

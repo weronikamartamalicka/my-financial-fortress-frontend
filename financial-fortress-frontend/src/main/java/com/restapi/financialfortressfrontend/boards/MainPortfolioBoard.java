@@ -20,7 +20,6 @@ import java.util.List;
 
 @Component
 public class MainPortfolioBoard extends Board {
-
     private ModelPortfolioClient modelPortfolioClient;
 
     @Autowired
@@ -101,7 +100,6 @@ public class MainPortfolioBoard extends Board {
             }
 
         }
-
         rootRow.add(chart, 2);
         rootRow.addNestedRow(nestedRow);
         board.add(rootRow);

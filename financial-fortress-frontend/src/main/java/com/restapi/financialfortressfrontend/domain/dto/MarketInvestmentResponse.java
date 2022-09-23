@@ -10,12 +10,12 @@ import java.time.LocalDateTime;
 @Getter
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MarketInvestmentResponse {
+
     @JsonProperty("date")
     public LocalDateTime date;
 
     @JsonProperty("type")
     public String type;
-
     @JsonProperty("quantity")
     public BigDecimal quantity;
 

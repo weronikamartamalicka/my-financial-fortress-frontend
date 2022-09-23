@@ -17,7 +17,6 @@ public class BondsIndexedInvestmentResponse {
 
     @JsonProperty("type")
     public String type;
-
     @JsonProperty("quantity")
     public BigDecimal quantity;
 

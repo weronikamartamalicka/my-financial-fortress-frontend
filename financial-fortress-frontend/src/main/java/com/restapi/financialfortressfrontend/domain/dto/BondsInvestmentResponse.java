@@ -18,7 +18,6 @@ public class BondsInvestmentResponse {
     public String type;
     @JsonProperty("quantity")
     public BigDecimal quantity;
-
     @JsonProperty("redemptionDate")
     public LocalDate redemptionDate;
 

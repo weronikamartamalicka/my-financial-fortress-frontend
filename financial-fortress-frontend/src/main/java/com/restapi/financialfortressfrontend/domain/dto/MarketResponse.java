@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 @Getter
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MarketResponse {
+
     @JsonProperty("date")
     public LocalDateTime date;
 

@@ -8,14 +8,12 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class DevelopedMarketChart extends Chart {
-
     private DevelopedMarketClient developedMarketClient;
 
     @Autowired
     public DevelopedMarketChart(DevelopedMarketClient developedMarketClient) {
         this.developedMarketClient = developedMarketClient;
     }
-
 
     public Chart getChart() {
         Chart chart = new Chart(ChartType.LINE);
