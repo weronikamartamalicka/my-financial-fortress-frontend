@@ -19,14 +19,14 @@ public class BondsInvestmentResponse {
     @JsonProperty("quantity")
     public BigDecimal quantity;
 
-    @JsonProperty("FACE_VALUE")
-    public BigDecimal faceValue;
-
     @JsonProperty("redemptionDate")
     public LocalDate redemptionDate;
 
     @JsonProperty("entireValuation")
     public BigDecimal entireValuation;
+
+    @JsonProperty("face_VALUE")
+    public BigDecimal faceValue;
 
     public LocalDateTime getDate() {
         return date;
